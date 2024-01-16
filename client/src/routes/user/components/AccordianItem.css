@@ -1,43 +1,42 @@
 .accordion-item {
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    margin-bottom: 10px;
-    margin-top: 5px;
-  }
-  
-  .accordion-title {
-    padding: 
-    5px;
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    transition: background-color 0.3s ease;
-  }
-  
-  .accordion-title:hover {
-    background-color: #f7f7f7;
-  }
-  
-  .arrow {
-    transition: transform 0.3s ease;
-  }
-  
-  .open .arrow {
-    transform: rotate(180deg);
-  }
-  
-  .accordion-content {
-    display: flex;
-    flex-wrap: wrap;
-    padding: 15px;
-    background-color: #f9f9f9;
-  }
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 10px;
+  margin-top: 5px;
+}
 
-  .accordion-content .accordion-image{
-    height: 100px;
-    width: 100px;
-    object-fit: contain;
-    cursor: pointer;
-  }
-  
+.accordion-title {
+  padding: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  color: rgb(20, 20, 20);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background-color 0.3s ease;
+}
+/* 
+.accordion-title:hover {
+  background-color: #f7f7f7;
+} */
+
+.arrow {
+  transition: transform 0.3s ease;
+  color: grey;
+}
+
+.open .arrow {
+  transform: rotate(180deg);
+}
+
+.accordion-content {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 5px;
+  background-color: #f9f9f9;
+}
+
+.accordion-content .accordion-image {
+  height: 140px;
+  object-fit: contain;
+  cursor: pointer;
+}

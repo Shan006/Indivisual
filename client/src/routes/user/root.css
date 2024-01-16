@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,500;1,200&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,500;1,200&display=swap");
 
 .container {
   margin: 0;
@@ -8,16 +8,64 @@
   display: flex;
   justify-content: space-between;
   box-sizing: border-box;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   background-color: #f5f5f5;
 }
 
 .container .main {
   width: 10vw;
   height: 100vh;
-  background-color: white;
-  padding: 8px;
-  border-radius: 8px;
+  overflow-y: auto;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 10px;
+}
+
+.container .main::-webkit-scrollbar {
+  width: 5px;
+}
+
+.container .main::-webkit-scrollbar-thumb {
+  background-color: #cbcbcb;
+}
+
+.container .logo {
+  border-bottom: 1px solid #f5f5f5;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sidebar-layers {
+  background-color: #f5f5f5;
+  display: flex;
+  align-items: end;
+  align-self: end;
+  flex-direction: column;
+  gap: 10px;
+  width: 102px;
+  border-left: 1px solid #f5f5f5;
+  border-top: 1px solid #f5f5f5;
+  border-bottom: 1px solid #f5f5f5;
+}
+
+.container .layers {
+  background: #fff;
+  width: 100px;
+}
+
+.layer-imgs {
+  height: 100px;
+  width: 100px;
+  object-fit: contain;
+  margin-top: 10px;
+}
+
+.layer-text {
+  padding: 20px 10px;
 }
 
 .container .customize {
@@ -33,30 +81,31 @@
 }
 
 .customize .custom-select {
-  width:100%;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
   background-color: white;
-  padding: 10px;
-  border-radius: 20px;
+  padding: 3px 10px;
+  border-radius: 50px;
   border: 1px solid #ccc;
   outline: none;
+  font-size: 13px;
+  color: grey;
 }
 
-.customize .nextStep{
+.customize .nextStep {
   width: 100%;
   padding: 10px;
   margin-top: 20px;
-  background-color: palevioletred;
+  background-color: black;
 }
 
-.customize .footer{
+.customize .footer {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  border-radius: 10px;
-  width:100%;
+  justify-content: space-around;
+  width: 100%;
   background-color: white;
 }
 
@@ -64,42 +113,50 @@
   position: relative;
   display: flex;
   align-items: center;
-  justify-content: center;
-  margin: 6px 0px 0px 2px;
 }
 
 .customize .footer .custom-file-input .file-label {
   cursor: pointer;
   padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
   display: flex;
+  flex-direction: column;
   align-items: center;
+  gap: 5px;
 }
 
-.customize .footer .custom-file-input .file-label:hover {
-  background-color: #f0f0f0;
+.customize .footer .custom-file-input .file-label span {
+  font-size: 12px;
+  color: grey;
+  font-weight: 400;
 }
+
+/* .customize .footer .custom-file-input .file-label:hover {
+  background-color: #f0f0f0;
+} */
 
 .customize .footer .custom-file-input .icon {
-  width: 20px;
-  height: 20px;
-  margin-left: 10px;
+  width: 30px;
+  height: 30px;
+  color: rgb(82, 82, 82);
 }
 
-.select-print-btn{
+.select-print-btn {
   display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
-.select-print-btn .print-btn{
-  background-color: palevioletred;
+.select-print-btn .print-btn {
+  background-color: black;
+  padding: 5px 20px;
+  border-radius: 50px;
+  text-transform: uppercase;
+  /* margin-left: 10px; */
   margin-bottom: 5px;
-  padding: 10px 20px 10px 20px;
-  margin-left: 10px;
 }
 
-.print-btn:hover{
-  background-color: palevioletred;
+.print-btn:hover {
+  background-color: black;
 }
 
 .preview {
@@ -109,7 +166,7 @@
   border: 1px solid #ccc;
   border-radius: 10px;
 }
-  
+
 .base-image,
 .overlay-image {
   position: absolute;
@@ -139,12 +196,12 @@
   z-index: 3;
 }
 
-.sticker{
+.sticker {
   width: 100%;
   height: 100%;
 }
 
-.text{
+.text {
   font-size: medium;
   color: black;
 }
@@ -209,10 +266,10 @@
 }
 
 .modal .brand .tab button.activeCompany {
-    border:2px solid rgb(143,191,255);
+  border: 2px solid rgb(143, 191, 255);
 }
 
-.modal .model{
+.modal .model {
   margin-top: 10px;
 }
 
@@ -230,14 +287,14 @@
 }
 
 .modal .model button.activePhone {
-    border:2px solid rgb(143,191,255);
+  border: 2px solid rgb(143, 191, 255);
 }
 
-.modal .color{
+.modal .color {
   margin-top: 10px;
 }
 
-.modal .color .images{
+.modal .color .images {
   display: flex;
   flex-wrap: wrap;
 }
@@ -249,29 +306,51 @@
   object-fit: contain;
 }
 
-.modal .color img.activeImage{
-  border:2px solid rgb(143,191,255);
+.modal .color img.activeImage {
+  border: 2px solid rgb(143, 191, 255);
+}
+
+.second-modal-container {
+  height: 80vh;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+}
+.close-secondmodel {
+  display: none;
 }
 
 .second-modal {
-  position: fixed;
-  bottom: 0;
-  left: 42.5%;
-  transform: translateX(-50%);
+  position: absolute;
+  bottom: -100%;
   width: 24vw;
-  height: 82vh;
   background: white;
   box-shadow: 0px -2px 10px rgba(0, 0, 0, 0.3);
   padding: 15px;
   z-index: 2147483647;
   border-radius: 10px;
   margin-bottom: 8px;
-  opacity: 0;
-  animation: fadeIn 0.3s ease-in-out forwards;
-  overflow-y: auto;
+  transition: 0.5s ease-in-out;
+  /* display: none; */
 }
 
-.second-modal .card{
+.second-modal-active {
+  position: absolute;
+  width: 24vw;
+  height: 75vh;
+  background: white;
+  box-shadow: 0px -2px 10px rgba(0, 0, 0, 0.3);
+  padding: 15px;
+  z-index: 2147483647;
+  border-radius: 10px;
+  margin-bottom: 8px;
+  opacity: 1;
+  overflow-y: auto;
+  bottom: 0;
+  transition: 0.5s ease-in-out;
+}
+
+.second-modal .card {
   margin-top: 20px;
   cursor: pointer;
 }
@@ -297,11 +376,10 @@
   animation: fadeIn 0.3s ease-in-out forwards;
 }
 
-.print-modal .confirm-btn{
+.print-modal .confirm-btn {
   width: 100%;
   padding: 10px;
   margin-top: 20px;
-  background-color: palevioletred;
   background-color: black;
   font-weight: bolder;
   text-transform: uppercase;
@@ -324,10 +402,10 @@
   animation: fadeIn 0.3s ease-in-out forwards;
 }
 
-.text-editor-modal .btns{
+.text-editor-modal .btns {
   margin-top: 20px;
   margin-left: 50px;
-  background-color: palevioletred;
+  background-color: black;
 }
 
 .cart-modal {
@@ -347,15 +425,15 @@
   animation: fadeIn 0.3s ease-in-out forwards;
 }
 
-.cart-modal .selected-case{
+.cart-modal .selected-case {
   height: 200px;
   width: 200px;
   object-fit: contain;
 }
 
-.cart-modal .btns{
+.cart-modal .btns {
   margin-top: 20px;
-  background-color: palevioletred;
+  background-color: black;
 }
 
 .sticker-modal {
@@ -376,20 +454,20 @@
   overflow-y: auto;
 }
 
-.sticker-modal .sticker-item{
+.sticker-modal .sticker-item {
   display: flex;
   flex-wrap: wrap;
 }
 
-.sticker-modal .sticker-item img{
+.sticker-modal .sticker-item img {
   cursor: pointer;
   margin: 10px;
   width: 70px;
   height: 70px;
 }
 
-.sticker-modal .btns{
-  background-color: palevioletred;
+.sticker-modal .btns {
+  background-color: black;
   margin: 10px;
 }
 
@@ -402,15 +480,12 @@
   overflow-y: auto;
 }
 
-.layer-imgs{
-  height: 100px;
-  width: 100px;
-  object-fit: contain;
-  margin-top: 10px;
-}
-
-.layer-text{
-  margin: 30px;
+.iWySwv,
+.flXdAg,
+.ckVSZr,
+.ljVOgg {
+  width: 30px !important;
+  height: 30px !important;
 }
 
 /* Styles for mobiles and tablets */
@@ -438,20 +513,14 @@
     width: 90%;
     height: 80vh;
   }
-  
-  .second-modal{
+
+  .print-modal {
     left: 49.5%;
     width: 90%;
     height: 80vh;
   }
 
-  .print-modal{
-    left: 49.5%;
-    width: 90%;
-    height: 80vh;
-  }
-
-  .text-editor-modal{
+  .text-editor-modal {
     left: 49.5%;
     width: 90%;
     height: 50vh;
@@ -465,5 +534,14 @@
 
   .customize select {
     width: 90vw;
+  }
+
+  .second-modal {
+    width: 100%;
+  }
+
+  .second-modal-active {
+    width: 100%;
+    padding: 10px;
   }
 }
