@@ -490,10 +490,20 @@
 
 /* ======= ADD TO CART STYLES ============ */
 .addtoCart{
-  background:#fff;
-  position: relative;
-  height: 100vh;
-  width: 100%;
+  position: fixed;
+  bottom: 0;
+  left: 42.5%;
+  transform: translateX(-50%);
+  width: 34vw;
+  height: 95vh;
+  background: white;
+  box-shadow: 0px -2px 10px rgba(0, 0, 0, 0.3);
+  padding: 15px;
+  z-index: 2147483647;
+  border-radius: 10px;
+  margin-bottom: 8px;
+  opacity: 0;
+  animation: fadeIn 0.3s ease-in-out forwards;
 }
 .cart-header {
   display: flex;
@@ -666,9 +676,9 @@
   color: white;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
-  position: absolute;
-  bottom: 0;
-  padding: 10px 5px;
+  /* position: absolute;
+  bottom: 0; */
+  /* padding: 10px 5px; */
   width: 100%;
 }
 
@@ -762,19 +772,21 @@
 /* ======= ADD TO CART STYLES ============ */
 .addtocart-modal{
   position: relative;
-  height: 100vh;
-  width: 30%;
-  overflow: hidden;
+  height: 80vh;
+  width: 30vw;
+  overflow: auto;
 }
 
 .cartpage{
+  display: flex;
+  flex-direction: column;
   background:#fff;
   position: absolute;
   top: 0;
   right: 0;
   z-index: 9999;
   transform: translateX(100%);
-  height: 100vh;
+  /* height: 100vh; */
   transition: all 0.3s ease;
 }
 .cartpage.expanded {
