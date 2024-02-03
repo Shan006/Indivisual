@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useMemo } from "react";
 import axios from "axios";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
@@ -52,11 +52,13 @@ const Root = () => {
   const [showCartModal, setShowCartModal] = useState(false);
   const [showEditor1, setShowEditor1] = useState(true);
   const [addToCart, setAddToCart] = useState(false);
-
+  const [fileteredData,setFilteredData] = useState([])
   const modalRef = useRef(null);
   const secondModalRef = useRef(null);
   const printModalRef = useRef(null);
-
+  const [fileteredStickers,setFilteredStickers] = useState()
+  const [subtotal,setSubtotal] = useState(30)
+  const [quantity,setQuantity] = useState(1)
   const toolbarOptions = {
     toolbar: [
       [{ font: [] }],
@@ -71,45 +73,50 @@ const Root = () => {
       ["clean"],
     ],
   };
+  const handleOnClick = (folder) => {
+    console.log("Folder:", folder);
+    const filteredItems = stickers.filter(item => item.fileName.startsWith(`${folder}_`));
+    console.log("Filtered Items:", filteredItems);
+    setFilteredStickers(filteredItems);
+};
+
+
+  const fetchCompanies = useMemo(() => async () => {
+    try {
+      const response = await axios.get(`${import.meta.env.VITE_BACKEND_URI}/getCompanies`);
+      console.log("All Companies", response.data);
+      setCompanies(response.data);
+    } catch (error) {
+      console.error("Error fetching companies:", error);
+    }
+  }, []);
+
+  const fetchCategories = useMemo(() => async () => {
+    try {
+      const response = await axios.get(`${import.meta.env.VITE_BACKEND_URI}/getCategories`);
+      console.log("All Categories", response.data);
+      setCategories(response.data);
+    } catch (error) {
+      console.error("Error fetching categories:", error);
+    }
+  }, []);
+
+  const fetchStickers = useMemo(() => async () => {
+    try {
+      const response = await axios.get(`${import.meta.env.VITE_BACKEND_URI}/stickers`);
+      console.log("All Stickers", response.data);
+      setStickers(response.data);
+      setFilteredStickers(response.data)
+    } catch (error) {
+      console.error("Error fetching stickers:", error);
+    }
+  }, []);
 
   useEffect(() => {
-    async function fetchCompanies() {
-      try {
-        const response = await axios.get(
-          `${import.meta.env.VITE_BACKEND_URI}/getCompanies`
-        );
-        console.log("All Companies", response.data);
-        setCompanies(response.data);
-      } catch (error) {
-        console.error("Error fetching companies:", error);
-      }
-    }
-    async function fetchCategories() {
-      try {
-        const response = await axios.get(
-          `${import.meta.env.VITE_BACKEND_URI}/getCategories`
-        );
-        console.log("All Categories", response.data);
-        setCategories(response.data);
-      } catch (error) {
-        console.error("Error fetching categories:", error);
-      }
-    }
-    async function fetchStickers() {
-      try {
-        const response = await axios.get(
-          `${import.meta.env.VITE_BACKEND_URI}/stickers`
-        );
-        console.log("All Stickers", response.data);
-        setStickers(response.data);
-      } catch (error) {
-        console.error("Error fetching cases:", error);
-      }
-    }
     fetchCompanies();
     fetchCategories();
     fetchStickers();
-  }, []);
+  }, [fetchCompanies, fetchCategories, fetchStickers]);
 
   const handleTakeSnapshot = () => {
     return new Promise((resolve, reject) => {
@@ -403,6 +410,43 @@ const Root = () => {
     };
   }, []);
 
+var counter=0;
+useEffect(()=>{
+   const getCat = () => {
+    // if(!fileteredData){
+      if(fileteredData.length < 1 ){
+
+    const uniquePrefixes = new Set();
+    const filteredObjects = [];
+    for (const obj of stickers) {
+        const fileName = obj.fileName;
+        const prefix = fileName.split('_')[0]; // Assuming filenames are separated by underscores
+    
+        if (!uniquePrefixes.has(prefix)) {
+            filteredObjects.push(obj);
+            uniquePrefixes.add(prefix);
+        }
+    }
+    
+    setFilteredData(filteredObjects);
+    counter++
+    console.log("filteredObjects")
+  // };}
+  }
+}
+  getCat();
+},[stickers])
+
+
+const handleOp = (operator) =>
+{
+    if(operator === "-")
+    setQuantity(quantity-1)
+    else if(operator === "+")
+    setQuantity(quantity+1)
+
+    setSubtotal(quantity*30)
+}
   return (
     <>
       <div className="container">
@@ -645,8 +689,24 @@ const Root = () => {
           )}
           {showStickerModal && (
             <div className="sticker-modal">
+              
+              <div className="cat" style={{display:"flex",justifyContent:"space-evenly",overflowX: "scroll"}}>
+              {fileteredData.map((sticker) => (
+                <div className="sticker-item">
+                  <img 
+                    key={sticker.id}
+                    src={`${import.meta.env.VITE_STICKERS_URI}/${
+                      sticker.fileName
+                    }`}
+                    
+                    alt={sticker.fileName}
+                    onClick={() => handleOnClick(sticker.fileName.split('_')[0])}
+                  />
+                  </div>
+                ))}
+              </div>
               <div className="sticker-item">
-                {stickers.map((sticker) => (
+                {fileteredStickers && fileteredStickers.map((sticker) => (
                   <img
                     key={sticker.id}
                     src={`${import.meta.env.VITE_STICKERS_URI}/${
@@ -693,7 +753,7 @@ const Root = () => {
                   <div className="cart-items">
                     <div className="cart-item">
                       <input className="checkbox" type="checkbox"></input>
-                      <img src={CartImg} />
+                      <img src={printedCase} />
 
                       <div className="cart-item-details">
                         <div className="cart-item-title">
@@ -710,9 +770,9 @@ const Root = () => {
                         </div>
 
                         <div className="cart-item-counter">
-                          <button>-</button>
-                          <p className="remove-item">1</p>
-                          <button>+</button>
+                          <button onClick={()=>handleOp("-")}>-</button>
+                          <p className="remove-item">{quantity}</p>
+                          <button onClick={()=>handleOp("+")}>+</button>
                         </div>
                       </div>
                     </div>
@@ -778,7 +838,7 @@ const Root = () => {
                     <div className="subtotal">
                       <div>
                         <h4>Subtotal</h4>
-                        <h4>30.00 USD</h4>
+                        <h4>{subtotal}USD</h4>
                       </div>
                       <div>
                         <h4>Shipping</h4>

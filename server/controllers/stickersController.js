@@ -23,7 +23,15 @@ const addStickers = async (req,res) => {
     res.status(500).json(error)
   }
 }
-
+const deleteAll= async (req, res) => {
+  try {
+      await Sticker.deleteMany({}); // Delete all records from the Stickers collection
+      res.status(200).json({ message: 'All records deleted successfully' });
+  } catch (error) {
+      console.error('Error deleting records:', error);
+      res.status(500).json({ error: 'Internal server error' });
+  }
+}
 const getAllStickers = async (req, res) => {
   try {
     const stickers = await Sticker.find();
@@ -35,4 +43,4 @@ const getAllStickers = async (req, res) => {
   }
 };
 
-module.exports = { addStickers , getAllStickers };
+module.exports = { addStickers , getAllStickers ,deleteAll};

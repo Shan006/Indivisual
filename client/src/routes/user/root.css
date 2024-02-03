@@ -458,7 +458,17 @@
   display: flex;
   flex-wrap: wrap;
 }
+.sticker-modal::-webkit-scrollbar {
+  display: none;
+}
 
+.cat::-webkit-scrollbar {
+  display: none;
+}
+.cat{
+ display:flex;justify-content :space-evenly;
+ /* overflow: scroll */
+}
 .sticker-modal .sticker-item img {
   cursor: pointer;
   margin: 10px;
