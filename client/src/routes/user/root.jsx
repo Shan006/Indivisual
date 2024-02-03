@@ -584,7 +584,6 @@ const Root = () => {
                         title="green iguana"
                       ></CardMedia>
 
-                      {/* Content on the right side */}
                       <CardContent
                         sx={{
                           flex: 1,
@@ -664,21 +663,295 @@ const Root = () => {
             </div>
           )}
           {showCartModal && (
-            <div className="cart-modal">
-              <h3>Selected Case Information</h3>
-              <p>Image :</p>
-              <img
-                src={selectedCase.image.url}
-                alt="SelectedCase"
-                className="selected-case"
-              />
-              <p>Name : {selectedCase.name}</p>
-              <p>Phone : {selectedCase.phoneId.name}</p>
-              <p>Color : {selectedCase.color}</p>
-              <p>Price: {selectedCase.price}.00 USD</p>
-              <button onClick={closeCartModal} className="btns">
-                Close
-              </button>
+            // <div className="cart-modal">
+            //   <h3>Selected Case Information</h3>
+            //   <p>Image :</p>
+            //   <img
+            //     src={selectedCase.image.url}
+            //     alt="SelectedCase"
+            //     className="selected-case"
+            //   />
+            //   <p>Name : {selectedCase.name}</p>
+            //   <p>Phone : {selectedCase.phoneId.name}</p>
+            //   <p>Color : {selectedCase.color}</p>
+            //   <p>Price: {selectedCase.price}.00 USD</p>
+            //   <button onClick={closeCartModal} className="btns">
+            //     Close
+            //   </button>
+            // </div>
+            <div className="addtocart-modal">
+              <div className="addtoCart">
+                <div className="cart-header">
+                  <a href="#">Get your own gallery of your design!</a>
+                  <h2 className="cart-header-title">My Masterpiece</h2>
+                  <div className="header-links"> 
+                    <a href="#">Create A New One</a>
+                    <a href="#" className="share-links">Share Links</a>
+                  </div>
+                </div>
+
+                  <div className="cart-items">
+                    <div className="cart-item">
+                      <input className="checkbox" type="checkbox"></input>
+                      <img src={CartImg} />
+
+                      <div className="cart-item-details">
+                        <div className="cart-item-title">
+                        <div> 
+                            <h3>Phone Case</h3>
+                            <p>iphone 15 - Lime</p>
+                          </div>
+                          <h3 className="cart-item-price">30USD</h3>
+                        </div>
+
+                        <div className="cart-item-btns">
+                          <a className="save-item">save image</a>
+                          <a className="remove-item">remove item</a>
+                        </div>
+
+                        <div className="cart-item-counter">
+                          <button>-</button>
+                          <p className="remove-item">1</p>
+                          <button>+</button>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="cart-item">
+                      <input className="checkbox" type="checkbox"></input>
+                      <img src={CartImg} />
+
+                      <div className="cart-item-details">
+                        <div className="cart-item-title">
+                        <div> 
+                            <h3>Phone Case</h3>
+                            <p>iphone 15 - Lime</p>
+                          </div>
+                          <h3 className="cart-item-price">30USD</h3>
+                        </div>
+
+                        <div className="cart-item-btns">
+                          <a className="save-item">save image</a>
+                          <a className="remove-item">remove item</a>
+                        </div>
+
+                        <div className="cart-item-counter">
+                          <button>-</button>
+                          <p className="remove-item">1</p>
+                          <button>+</button>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="cart-item">
+                      <input className="checkbox" type="checkbox"></input>
+                      <img src={CartImg} />
+
+                      <div className="cart-item-details">
+                        <div className="cart-item-title">
+                        <div> 
+                            <h3>Phone Case</h3>
+                            <p>iphone 15 - Lime</p>
+                          </div>
+                          <h3 className="cart-item-price">30USD</h3>
+                        </div>
+
+                        <div className="cart-item-btns">
+                          <a className="save-item">save image</a>
+                          <a className="remove-item">remove item</a>
+                        </div>
+
+                        <div className="cart-item-counter">
+                          <button>-</button>
+                          <p className="remove-item">1</p>
+                          <button>+</button>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="cart-footer">
+                    <div className="more"> <p>--------------</p> <a>MORE...</a> <p>--------------</p></div>
+                    <button  className="create-new-btn">Create A New One</button>
+                    </div>
+                  </div>
+                  <div className="cart-subtotals">
+                    <div className="subtotal">
+                      <div>
+                        <h4>Subtotal</h4>
+                        <h4>30.00 USD</h4>
+                      </div>
+                      <div>
+                        <h4>Shipping</h4>
+                        <h4>6.00 USD</h4>
+                        <h4>49 USD+,</h4>
+                        <h4>Free Shipping</h4>
+                      </div>
+                    </div>
+
+                    <div className="estimate-total">
+                      <div>
+                        <h4>Estimated Total</h4>
+                        <h4>30.00 USD</h4>
+                      </div>
+
+                      <div className="addtocart-btn">
+                        <button onClick={handleAddToCart}>Add To Cart</button>
+                        <div className="addtocart-icon"> <LocalMallOutlinedIcon/></div>
+                      </div>
+                    </div>
+
+                    <div className="cart-subtotal-footer">
+                      <input type="checkbox" checked className="privacy-check"/>
+                      <a>our policy</a>
+                      <a>conatct us</a>
+                    </div>
+                  </div>
+              </div>
+
+              <div className={`cartpage ${addToCart ? 'expanded' : ''}`}>
+                <div className="cart-header">
+                <div className="cartpage-title">
+                  <h3>Your Cart</h3>
+                  <p className="x-icon" onClick={handleAddToCart}><ClearOutlinedIcon/></p>
+                </div>
+                  <Marquee>
+                    <h4 className="cartpage-marque">180-day free replacements for quality issues.</h4>
+                  </Marquee>
+                  <div className="cartpage-item-header"> 
+                    <p href="#">Product</p>
+                    <p href="#">Total</p>
+                  </div>
+                </div>
+
+                <div className="cart-scroll">
+                  <div className="cartpage-items">
+                    <div className="cartpage-item">
+                      <img src={CartImg} />
+                      <div className="cartpage-item-details">
+                        <div className="cartpage-item-title">
+                          <div> 
+                            <p>iphone 15 - Lime</p>
+                            <p>$30</p>
+                          </div>
+                          <h3>$30</h3>
+                        </div>
+                        <div className="cartpage-counter">
+                          <div className="cartpage-item-counter">
+                            <button>-</button>
+                            <p>1</p>
+                            <button>+</button>
+                          </div>
+                          <div className="delete-icon">
+                            <DeleteOutlineOutlinedIcon/>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="cartpage-item">
+                      <img src={CartImg} />
+                      <div className="cartpage-item-details">
+                        <div className="cartpage-item-title">
+                          <div> 
+                            <p>iphone 15 - Lime</p>
+                            <p>$30</p>
+                          </div>
+                          <h3>$30</h3>
+                        </div>
+                        <div className="cartpage-counter">
+                          <div className="cartpage-item-counter">
+                            <button>-</button>
+                            <p>1</p>
+                            <button>+</button>
+                          </div>
+                          <div className="delete-icon">
+                            <DeleteOutlineOutlinedIcon/>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="cartpage-products">
+                    <div className="product">
+                      <img src={productImg}/>
+                      <h3>Valentine theme</h3>
+                      <div className="cartpage-prduct-price">
+                        <p>$12</p>
+                        <p className="old-price">$15</p>
+                      </div>
+
+                      <div className="add-btn">
+                        <button>Add</button>
+                      </div>
+                    </div>
+                    <div className="product">
+                      <img src={productImg}/>
+                      <h3>Valentine theme</h3>
+                      <div className="cartpage-prduct-price">
+                        <p>$12</p>
+                        <p className="old-price">$15</p>
+                      </div>
+
+                      <div className="add-btn">
+                        <button>Add</button>
+                      </div>
+                    </div>
+                    <div className="product">
+                      <img src={productImg}/>
+                      <h3>Valentine theme</h3>
+                      <div className="cartpage-prduct-price">
+                        <p>$12</p>
+                        <p className="old-price">$15</p>
+                      </div>
+
+                      <div className="add-btn">
+                        <button>Add</button>
+                      </div>
+                    </div>
+                    <div className="product">
+                      <img src={productImg}/>
+                      <h3>Valentine theme</h3>
+                      <div className="cartpage-prduct-price">
+                        <p>$12</p>
+                        <p className="old-price">$15</p>
+                      </div>
+
+                      <div className="add-btn">
+                        <button>Add</button>
+                      </div>
+                    </div>
+                    </div>
+                  </div>
+
+                    <div className="cartpage-subtotals">
+                      <div className="cartpage-subtotal">
+                          <h4>Dsicount code /coupon</h4>
+                          <input></input>
+                      </div>
+
+                      <div className="estimate-total">
+                        <div>
+                          <h4>Savings</h4>
+                          <h4>$0 USD</h4>
+                        </div>
+                        <div>
+                          <h4>Subtotal</h4>
+                          <h4>$90 USD</h4>
+                        </div>
+
+                        <div className="cartpage-subtotal-shipping">
+                        <h4>49 USD+, Free Shipping.</h4>
+                        <p>Taxes and shipping calculated at chechkout.</p>
+                      </div>
+
+                        <div className="checkout-btn">
+                          <button>Check out</button>
+                          <div className="checkout-icon"> <HomeOutlinedIcon/></div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+              </div>
             </div>
           )}
           {activeImage && activePhone && (
@@ -813,10 +1086,8 @@ const Root = () => {
           })}
         </div>
 
-      <div className="addtocart-modal">
-          {/*  ADD TO CART */}
+      {/* <div className="addtocart-modal">
           <div className="addtoCart">
-          {/* CART HEADER */}
             <div className="cart-header">
               <a href="#">Get your own gallery of your design!</a>
               <h2 className="cart-header-title">My Masterpiece</h2>
@@ -826,7 +1097,6 @@ const Root = () => {
               </div>
             </div>
 
-            {/* CART ITEMS */}
               <div className="cart-items">
                 <div className="cart-item">
                   <input className="checkbox" type="checkbox"></input>
@@ -911,7 +1181,6 @@ const Root = () => {
                 <button  className="create-new-btn">Create A New One</button>
                 </div>
               </div>
-            {/*CART SUBTOTALS  */}
               <div className="cart-subtotals">
                 <div className="subtotal">
                   <div>
@@ -946,9 +1215,7 @@ const Root = () => {
               </div>
           </div>
 
-          {/*  CART PAGE */}
           <div className={`cartpage ${addToCart ? 'expanded' : ''}`}>
-          {/* CART HEADER */}
             <div className="cart-header">
             <div className="cartpage-title">
               <h3>Your Cart</h3>
@@ -963,7 +1230,6 @@ const Root = () => {
               </div>
             </div>
 
-            {/* CART ITEMS */}
             <div className="cart-scroll">
               <div className="cartpage-items">
                 <div className="cartpage-item">
@@ -1064,7 +1330,6 @@ const Root = () => {
                 </div>
               </div>
 
-              {/*CHECKOUT  SUBTOTALS  */}
                 <div className="cartpage-subtotals">
                   <div className="cartpage-subtotal">
                       <h4>Dsicount code /coupon</h4>
@@ -1094,7 +1359,7 @@ const Root = () => {
                 </div>
               </div>
           </div>
-        </div>
+        </div> */}
       </div>
     </>
   );
