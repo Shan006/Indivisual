@@ -752,7 +752,7 @@ const handleOp = (operator) =>
 
                   <div className="cart-items">
                     <div className="cart-item">
-                      <input className="checkbox" type="checkbox"></input>
+                      <input className="checkbox" type="checkbox" checked></input>
                       <img src={printedCase} />
 
                       <div className="cart-item-details">
