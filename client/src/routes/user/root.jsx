@@ -1,3 +1,4 @@
+
 import { useState, useRef, useEffect, useMemo } from "react";
 import axios from "axios";
 import ReactQuill from "react-quill";
@@ -28,7 +29,12 @@ import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined
 import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
 import ClearOutlinedIcon from '@mui/icons-material/ClearOutlined';
 import Marquee from "react-fast-marquee";
-
+import left from  "../../assets/left.png"
+import center from  "../../assets/center.png"
+import right from  "../../assets/right.png"
+import bold from  "../../assets/bold.png"
+import italic from  "../../assets/italic.png"
+import cut from  "../../assets/cut.png"
 const Root = () => {
   const [modalOpen, setModalOpen] = useState(false);
   const [secondModalOpen, setSecondModalOpen] = useState(false);
@@ -59,6 +65,16 @@ const Root = () => {
   const [fileteredStickers,setFilteredStickers] = useState()
   const [subtotal,setSubtotal] = useState(30)
   const [quantity,setQuantity] = useState(1)
+  const [font,setFont] = useState()
+  const [area,setArea] = useState("font")
+  const [position,setPosition]=useState()
+  const [boldd,setBoldd] = useState(false)
+  const [italicc,setItalicc] = useState(false)
+  const [cutt,setCutt] = useState(false)
+  const [color,setColor] = useState()
+  const fontFamily = ['Andale Mono, monospace','Helvetica, sans-serif','OCR A Std, monospace','Apple Chancery, cursive','Impact, fantasy']
+  const colors = ['red', 'yellow', 'blue', 'green', 'orange', 'purple', 'pink', 'brown', 'cyan', 'magenta', 'teal', 'navy', 'lime', 'olive', 'maroon', 'silver', 'black', 'gray', 'white'];
+
   const toolbarOptions = {
     toolbar: [
       [{ font: [] }],
@@ -672,13 +688,46 @@ const handleOp = (operator) =>
               </button>
             </div>
           )}
-          {showTextEditorModal && (
+                     {showTextEditorModal && (
             <div className="text-editor-modal">
-              <ReactQuill
-                modules={toolbarOptions}
-                theme="snow"
-                onChange={setEditedText}
-              />
+             <input placeholder="type here..." style={{border:"none", outline: "none"}}  onChange={e=>setEditedText(e.target.value)}/>
+              <div style={{display:"flex",justifyContent:"flex-start",gap:"10px"}}>
+              <h3 onClick={e=>(setArea("font"))} style={{color:area !== "font" && "gray"}}>font</h3>
+              <h3 onClick={e=>(setArea("style"))} style={{color:area !== "style" && "gray"}}>style</h3>
+              
+              </div>
+{
+                 area === "font" ?
+                 <div style={{display:"flex",flexWrap:"wrap"}}>
+           
+                  {fontFamily.map((m) => (
+        <div onClick={()=>setFont(m)} key={m} style={{ width: "4em", height: "4em", margin: "5px",background:"lightGrey"}}>
+          <h3 style={{ fontFamily: m, fontSize: "20px", display:"flex",justifyContent:"center",marginTop:"20%"}}>font</h3>
+        </div>
+      ))}
+              
+              </div>
+              :
+              <>
+              <div style={{display:"flex",gap:"15px",overflow:"scroll",height:"2em",width:"20em"}} className="cat">
+            {colors.map((m)=>  
+              <div style={{borderRadius:"120%",background:m,width:"50em",color:m}} onClick={e=>setColor(m)}>s</div>
+              )}
+              
+              </div>
+
+              <div style={{display:"flex",flexWrap:"flex",gap:"15px"}}>
+              <img src={left} onClick={e=>setPosition("flex-start")} />
+              <img src={center} onClick={e=>setPosition("center")}/>
+              <img src={right} onClick={e=>setPosition("flex-end")}/>
+              <img src={bold} onClick={e=>setBoldd(!boldd)}/>
+              <img src={italic} onClick={e=>setItalicc(!italicc)}/>
+              <img src={cut} onClick={e=>setCutt(!cutt)}/>
+              </div>              </>
+              }
+
+            
+              
               <button className="btns" onClick={AddEditedText}>
                 Add Text
               </button>
@@ -1032,7 +1081,7 @@ const handleOp = (operator) =>
                   {layer.file ? (
                     <img src={layer.file} alt="Sticker" className="sticker" />
                   ) : (
-                    <div
+                    <div style={{fontFamily:font,justifyContent:position,textDecoration: cutt && "line-through",fontStyle:italicc && "italic",fontWeight:boldd && "bold",color:color}}
                       dangerouslySetInnerHTML={{ __html: layer.textDesc }}
                       className="text"
                     />
